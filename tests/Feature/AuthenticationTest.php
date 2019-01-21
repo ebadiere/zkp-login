@@ -42,8 +42,15 @@ class AuthenticationTest extends TestCase
     /** @test */
     public function it_will_log_a_user_in()
     {
-        $response = $this->post('api/auth/login', [
+        $user = new User([
             'name'     => 'testUser',
+            'email'    => 'test@email.com',
+            'password' => '123456'
+        ]);
+
+        $user->save();
+
+        $response = $this->post('api/auth/login', [
             'email'    => 'test@email.com',
             'password' => '123456'
         ]);
